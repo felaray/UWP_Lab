@@ -22,12 +22,7 @@ namespace UWPLab
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public MainPage()
-        {
-            this.InitializeComponent();
-        }
-
-
+        #region Init
         public class MenuBase
         {
             public virtual NavigationViewItemBase Add()
@@ -82,8 +77,14 @@ namespace UWPLab
                 new MenuItem{ Icon= Symbol.Find, Content="Find", Tag="Find", Page=typeof(Dashboard),Enable=false},
                 new MenuSpace{ }
             };
+        #endregion
 
-        private void Nav_Loaded(object sender, RoutedEventArgs e)
+        public MainPage()
+        {
+            this.InitializeComponent();
+        }
+
+         private void Nav_Loaded(object sender, RoutedEventArgs e)
         {
             foreach (var item in navList)
             {
