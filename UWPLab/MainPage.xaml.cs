@@ -30,7 +30,7 @@ namespace UWPLab
                 return null;
             }
         }
-        public class MenuSpace : MenuBase
+        public class MenuSeparator : MenuBase
         {
             public override NavigationViewItemBase Add()
             {
@@ -71,11 +71,11 @@ namespace UWPLab
                 new MenuHeader{ Content="Page" },
                 new MenuItem{ Icon= Symbol.Home, Content="Home", Tag="Home", Page=typeof(Dashboard) },
                 new MenuItem{ Icon= Symbol.TwoPage, Content="Hub", Tag="Hub", Page=typeof(Hub)},
-                new MenuSpace{ },
+                new MenuSeparator{ },
                 new MenuHeader{ Content="Lab" },
                 new MenuItem{ Icon= Symbol.Map, Content="Map", Tag="Map", Page=typeof(Dashboard), Enable=false},
                 new MenuItem{ Icon= Symbol.Find, Content="Find", Tag="Find", Page=typeof(Dashboard),Enable=false},
-                new MenuSpace{ }
+                new MenuSeparator{ }
             };
         #endregion
 
