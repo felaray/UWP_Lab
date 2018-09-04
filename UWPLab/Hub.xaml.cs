@@ -27,5 +27,9 @@ namespace UWPLab
             this.InitializeComponent();
         }
 
+        private void Hub_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -9,18 +9,39 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Hub Header="News">
-            <HubSection Header="Latest">
+        <Hub x:Name="HubContainer" Header="Lab" Loaded="Hub_Loaded">
+            <HubSection MinWidth="600" Header="Latest">
                 <DataTemplate>
-                    <!-- Content -->
+                    <Grid>
+                        <TextBlock Text="The most recent news will be here." 
+                           Style="{ThemeResource BodyTextBlockStyle}"/>
+                    </Grid>
                 </DataTemplate>
             </HubSection>
-            <HubSection Header="Tech" IsHeaderInteractive="True" Background="#222222" MinWidth="250" RequestedTheme="Dark">
+
+            <HubSection Header="Tech" IsHeaderInteractive="True"  
+                Background="#222222" MinWidth="250">
                 <DataTemplate>
-                    <!-- Content -->
+                    <StackPanel>
+                        <TextBlock Text="Tech news goes here."
+                           Style="{ThemeResource BodyTextBlockStyle}"/>
+                        <TextBlock Text="Click the header to go to the Tech page."
+                           Style="{ThemeResource BodyTextBlockStyle}"/>
+                    </StackPanel>
                 </DataTemplate>
             </HubSection>
-            <!-- More sections -->
+
+            <HubSection Header="Sports" IsHeaderInteractive="True" 
+                Background="#444444" MinWidth="250">
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="Sports news goes here."
+                           Style="{ThemeResource BodyTextBlockStyle}"/>
+                        <TextBlock Text="Click the header to go to the Sports page." 
+                           Style="{ThemeResource BodyTextBlockStyle}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </HubSection>
         </Hub>
     </Grid>
 </Page>
