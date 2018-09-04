@@ -47,8 +47,9 @@ namespace UWPLab
             public string Content { get; set; } = null;
             public override NavigationViewItemBase Add()
             {
-                return new NavigationViewItemHeader {
-                    Content=Content
+                return new NavigationViewItemHeader
+                {
+                    Content = Content
                 };
             }
         }
@@ -57,30 +58,36 @@ namespace UWPLab
             public Symbol Icon { get; set; }
             public string Tag { get; set; } = null;
             public Type Page { get; set; } = null;
+            public bool Enable { get; set; } = true;
             public override NavigationViewItemBase Add()
             {
                 return new NavigationViewItem
                 {
                     Content = Content,
                     Tag = Tag,
-                    Icon = new SymbolIcon(Icon = Icon)
+                    Icon = new SymbolIcon(Icon = Icon),
+                    IsEnabled = Enable
                 };
             }
         }
 
+        public readonly List<MenuBase> navList = new List<MenuBase>
+        {
+                new MenuHeader{ Content="Page" },
+                new MenuItem{ Icon= Symbol.Home, Content="Home", Tag="Home", Page=typeof(Dashboard) },
+                new MenuItem{ Icon= Symbol.TwoPage, Content="Hub", Tag="Hub", Page=typeof(Hub)},
+                new MenuSpace{ },
+                new MenuHeader{ Content="Lab" },
+                new MenuItem{ Icon= Symbol.Map, Content="Map", Tag="Map", Page=typeof(Dashboard), Enable=false},
+                new MenuItem{ Icon= Symbol.Find, Content="Find", Tag="Find", Page=typeof(Dashboard),Enable=false},
+                new MenuSpace{ }
+            };
 
         private void Nav_Loaded(object sender, RoutedEventArgs e)
         {
-            var navList = new List<NavigationViewItemBase>()
+            foreach (var item in navList)
             {
-                new MenuHeader{ Content="Lab" }.Add(),
-                new MenuItem{ Icon= Symbol.Home, Content="Home", Tag="Home", Page=typeof(Dashboard)}.Add(),
-                new MenuSpace{ }.Add()
-            };
-
-            foreach(var item in navList)
-            {
-                Nav.MenuItems.Add(item);
+                Nav.MenuItems.Add(item.Add());
             }
         }
 
@@ -90,6 +97,12 @@ namespace UWPLab
                 .OfType<NavigationViewItem>()
                 .First(i => args.InvokedItem.Equals(i.Content))
                 .Tag.ToString();
+
+            var targetPage = navList
+                .Where(c => Equals(c.GetType(), typeof(MenuItem))).ToList()
+                .ConvertAll(c => (MenuItem)c).First(c => c.Tag.Equals(navItemTag))
+                .Page;
+            Page.Navigate(targetPage);
         }
     }
 }
